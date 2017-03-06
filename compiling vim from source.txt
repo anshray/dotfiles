@@ -1,0 +1,42 @@
+Ubuntu 16.04
+Ref:-
+1/ https://www.xorpd.net/blog/vim_python3_install.html
+2/ https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+3/ Vim as a Python IDE - Martin Brochhaus
+4/ http://wikimatze.de/compiling-vim-from-source-for-ubuntu-and-mac-with-rbenv
+
+sudo apt remove vim vim-tiny vim-runtime vim-common
+cd ~
+cd src
+git clone https://github.com/vim/vim.git
+cd vim
+./configure \
+--enable-perlinterp \
+--enable-pythoninterp \
+--enable-rubyinterp \
+--enable-cscope \
+--enable-gui=auto \
+--enable-gtk2-check \
+--enable-gnome-check \
+--with-features=huge \
+--enable-multibyte \
+--with-x \
+--with-compiledby="ary" \
+--with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
+--prefix=/usr
+"make the prefix /usr instead of /opt/vim80
+make
+make test
+sudo checkinstall
+**********************************************************************
+
+ Done. The new package has been installed and saved to
+
+ /home/ary/src/vim/vim_20170305-1_amd64.deb
+
+ You can remove it from your system anytime using:
+
+      dpkg -r vim
+
+**********************************************************************
+sudo ln -s /opt/vim80/bin/vim /usr/bin/vim

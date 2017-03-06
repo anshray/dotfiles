@@ -1,5 +1,5 @@
 " Sample .vimrc file by Anshuman Ray (rayanshu@gmail.com)
-" version 6.2 beta
+" version 6.3 beta
 
 " ======================================
 " Note to myself:
@@ -38,17 +38,20 @@ Plugin 'mileszs/ack.vim'
 "Plugin 'nelstrom/vim-markdown-preview'
 Plugin 'tpope/vim-surround'
 
-" python syntax checker and linting
+" python syntax checker, linting and highlighting
 "Plugin 'nvie/vim-flake8'
 "Plugin 'vim-scripts/Pydiction'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
+Plugin 'hdima/python-syntax'
 
 " auto-completion stuff
 Plugin 'ervandew/supertab'
+Plugin 'majutsushi/tagbar'
 "Plugin 'python-mode/python-mode'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'klen/rope-vim'
-"Plugin 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 
 " code folding and indentation
 Plugin 'tmhedberg/SimpylFold'
@@ -59,6 +62,7 @@ Plugin 'michalbachowski/vim-wombat256mod'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jnurmine/Zenburn'
 Plugin 'marcopaganini/termschool-vim-theme'
+Plugin 'jpo/vim-railscasts-theme'
 
 " Etc.
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -150,13 +154,15 @@ endif
 
 let g:solarized_termcolors=256
 "colorscheme solarized
-colorscheme termschool
+"colorscheme termschool
 "colorscheme wombat256mod
+colorscheme railscasts
 
 " To enable easier toggle between light and dark themes
 "call togglebg#map("<F5>")
 
 set guifont=Monaco:h14
+set cursorline
 
 " Increase the command window height
 set cmdheight=1
@@ -167,7 +173,7 @@ set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=80
-highlight ColorColumn ctermbg=233
+highlight ColorColumn ctermbg=232
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -220,12 +226,12 @@ nnoremap <F3> :call NumberToggle()<cr>
 let g:SimpylFold_docstring_preview = 1
 
 " settings for systastic
-let g:syntastic_python_python_exec = "python2" " otherwise vim shows syntax errors in print statements
+"let g:syntastic_python_python_exec = "python2" " otherwise vim shows syntax errors in print statements
 
 " YouCompleteMe autocomplete settings
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+"let g:ycm_autoclose_preview_window_after_completion=1
+"map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 "autocmd BufWritePost *.py,*.c,*.sh YcmForceCompileAndDiagnostics
 
 " NERDTree settings

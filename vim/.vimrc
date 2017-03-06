@@ -326,9 +326,9 @@ autocmd FileType python set autoindent
 " make backspaces more powerful
 set backspace=indent,eol,start
 
-"Folding based on indentation:
+" Folding based on indentation:
 autocmd FileType python set foldmethod=indent
-"use space to open folds
+" use space to open folds
 nnoremap <space> za
 
 " map sort function to a key to automatically sort python imports alphabetically
@@ -336,5 +336,5 @@ vnoremap <Leader>s :sort<CR>
 
 "----------Stop python PEP 8 stuff--------------
 
-"js stuff"
+" js stuff
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2

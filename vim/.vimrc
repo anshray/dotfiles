@@ -30,6 +30,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'jeetsukumaran/vim-buffergator'
 
 " html
 "Plugin 'isnowfy/python-vim-instant-markdown'
@@ -138,7 +139,10 @@ set t_vb=
 " Color scheme and font settings
 " ===============================
 " Set to True Color 256-bit
+set encoding=utf-8
 set t_Co=256
+set term=xterm-256color
+set termencoding=utf-8
 syntax on
 
 " Show whitespace
@@ -152,7 +156,7 @@ else
   set background=dark
 endif
 
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 "colorscheme solarized
 "colorscheme termschool
 "colorscheme wombat256mod
@@ -161,7 +165,7 @@ colorscheme railscasts
 " To enable easier toggle between light and dark themes
 "call togglebg#map("<F5>")
 
-set guifont=Monaco:h14
+"set guifont=Monaco:h14
 set cursorline
 
 " Increase the command window height
@@ -225,6 +229,9 @@ nnoremap <F3> :call NumberToggle()<cr>
 " to view atleast the doc string when a code block is folded
 let g:SimpylFold_docstring_preview = 1
 
+" because supertab cycles backwards by default(c-p)
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " settings for systastic
 "let g:syntastic_python_python_exec = "python2" " otherwise vim shows syntax errors in print statements
 
@@ -233,6 +240,10 @@ let g:SimpylFold_docstring_preview = 1
 "map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 "autocmd BufWritePost *.py,*.c,*.sh YcmForceCompileAndDiagnostics
+
+" ALE linter settings
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+
 
 " NERDTree settings
 nnoremap <F4> :NERDTreeToggle<CR>
@@ -243,6 +254,13 @@ let NERDTreeShowBookmarks=1
 
 " for vim-powerline
 set laststatus=2
+set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set fillchars+=stl:\ ,stlnc:\
+"let g:Powerline_mode_V="V·LINE"
+"let g:Powerline_mode_cv="V·BLOCK"
+"let g:Powerline_mode_S="S·LINE"
+"let g:Powerline_mode_cs="S·BLOCK"
 
 " for NERDCommenter
 " Add spaces after comment delimiters by default
@@ -272,10 +290,8 @@ cnoreabbrev AG Ack
 " Settings for jedi-vim
 " let g:jedi#usages_command = "<leader>z"
 " let g:jedi#popup_on_dot = 0
-" let g:jedi#popup_select_first = 0
 
-
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+"map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " python with virtualenv support
 py << EOF
@@ -293,7 +309,7 @@ EOF
 ":set tags=~/mytags "tags for ctags and taglist
 
 "omnicomplete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 
 "------------Start Python PEP 8 stuff----------------
@@ -319,9 +335,6 @@ au BufRead,BufNewFile *.py,*.pyw, set textwidth=119
 
 " Use UNIX (\n) line endings.
 au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.sh set fileformat=unix
-
-" Set the default file encoding to UTF-8:
-set encoding=utf-8
 
 " For full syntax highlighting:
 let python_highlight_all=1

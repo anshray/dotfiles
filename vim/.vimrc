@@ -1,5 +1,5 @@
 " Sample .vimrc file by Anshuman Ray (rayanshu@gmail.com)
-" version 6.3 beta
+" version 6.4 beta
 
 " ======================================
 " Note to myself:
@@ -30,7 +30,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'bling/vim-bufferline'
+"Plugin 'jeetsukumaran/vim-buffergator'
 
 " html
 "Plugin 'isnowfy/python-vim-instant-markdown'
@@ -45,6 +46,7 @@ Plugin 'tpope/vim-surround'
 "Plugin 'scrooloose/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'hdima/python-syntax'
+Plugin 'jmcantrell/vim-virtualenv'
 
 " auto-completion stuff
 Plugin 'ervandew/supertab'
@@ -66,7 +68,9 @@ Plugin 'marcopaganini/termschool-vim-theme'
 Plugin 'jpo/vim-railscasts-theme'
 
 " Etc.
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdcommenter'
 
 " All of your Plugins must be added before the following line
@@ -134,6 +138,8 @@ set undolevels=700
 " Disable the irritating bell in putty
 set visualbell
 set t_vb=
+
+set ttimeoutlen=150
 
 " ===============================
 " Color scheme and font settings
@@ -243,6 +249,10 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ALE linter settings
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_sign_error = '~!'
+
+" Tagbar settings
+nmap <leader>o :TagbarToggle<CR>
 
 
 " NERDTree settings
@@ -252,11 +262,17 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 
-" for vim-powerline
+" for vim-airline
 set laststatus=2
-set guifont=Inconsolata\ for\ Powerline:h15
-let g:Powerline_symbols = 'fancy'
-set fillchars+=stl:\ ,stlnc:\
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='simple'
+let g:airline_powerline_fonts = 1
+
+" for vim-powerline
+"set laststatus=2
+"set guifont=Inconsolata\ for\ Powerline:h15
+"let g:Powerline_symbols = 'fancy'
+"set fillchars+=stl:\ ,stlnc:\
 "let g:Powerline_mode_V="V·LINE"
 "let g:Powerline_mode_cv="V·BLOCK"
 "let g:Powerline_mode_S="S·LINE"
@@ -288,7 +304,7 @@ cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 
 " Settings for jedi-vim
-" let g:jedi#usages_command = "<leader>z"
+let g:jedi#usages_command = "<leader>z"
 " let g:jedi#popup_on_dot = 0
 
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>

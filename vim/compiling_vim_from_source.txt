@@ -7,6 +7,7 @@ Ref:-
 
 sudo apt remove vim vim-tiny vim-runtime vim-common
 cd ~
+cd projects
 git clone https://github.com/vim/vim.git
 cd vim
 ./configure \

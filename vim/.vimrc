@@ -140,7 +140,8 @@ set undolevels=700
 set visualbell
 set t_vb=
 
-set ttimeoutlen=150
+" Timeout between Insert to Command mode
+set ttimeoutlen=120
 
 " ===============================
 " Color scheme and font settings
@@ -150,7 +151,7 @@ set encoding=utf-8
 set t_Co=256
 set term=xterm-256color
 set termencoding=utf-8
-set termguicolors
+"set termguicolors
 syntax on
 
 " Show whitespace
@@ -167,15 +168,15 @@ endif
 "let g:solarized_termcolors=256
 "colorscheme solarized
 "colorscheme termschool
-"colorscheme wombat256mod
+colorscheme wombat256mod
 "colorscheme railscasts
-colorscheme tender
+"colorscheme tender
 
 " To enable easier toggle between light and dark themes
 "call togglebg#map("<F5>")
 
 "set guifont=Monaco:h14
-set cursorline
+"set cursorline
 
 " Increase the command window height
 set cmdheight=1
@@ -268,7 +269,7 @@ let NERDTreeShowBookmarks=1
 " for vim-airline
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='tender'
+let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 
 " for vim-powerline
@@ -295,7 +296,7 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " Settings for CtrlP
-let g:ctrlp_max_height = 30
+let g:ctrlp_max_height = 24
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*

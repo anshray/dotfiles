@@ -1,2 +1,2 @@
 # dotfiles
-My personal dotfiles <ARY>
+My personal dotfiles \<ARY\>

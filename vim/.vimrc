@@ -52,8 +52,8 @@ Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'ervandew/supertab'
 Plugin 'majutsushi/tagbar'
 "Plugin 'python-mode/python-mode'
-"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'klen/rope-vim'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi-vim'
 
 " code folding and indentation
@@ -66,6 +66,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'jnurmine/Zenburn'
 Plugin 'marcopaganini/termschool-vim-theme'
 Plugin 'jpo/vim-railscasts-theme'
+Plugin 'jacoborus/tender.vim'
 
 " Etc.
 "Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -149,6 +150,7 @@ set encoding=utf-8
 set t_Co=256
 set term=xterm-256color
 set termencoding=utf-8
+set termguicolors
 syntax on
 
 " Show whitespace
@@ -166,7 +168,8 @@ endif
 "colorscheme solarized
 "colorscheme termschool
 "colorscheme wombat256mod
-colorscheme railscasts
+"colorscheme railscasts
+colorscheme tender
 
 " To enable easier toggle between light and dark themes
 "call togglebg#map("<F5>")
@@ -183,7 +186,7 @@ set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=80
-highlight ColorColumn ctermbg=232
+highlight ColorColumn ctermbg=233
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -265,7 +268,7 @@ let NERDTreeShowBookmarks=1
 " for vim-airline
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='simple'
+let g:airline_theme='tender'
 let g:airline_powerline_fonts = 1
 
 " for vim-powerline

@@ -1,0 +1,9 @@
+Setup mintty for ssh in ConEmu/Cmder:-
+
+{ssh_local::cygwin bash}
+Task Parameters - /icon "C:\cygwin64\bin\mintty.exe" /single
+Commands - C:\cygwin64\bin\mintty.exe - -new_console:d:%USERPROFILE%
+
+{ssh_local::ubuntu @8101}
+Task Parameters - /dir "%USERPROFILE%\Desktop" /icon "C:\cygwin64\bin\mintty.exe" /single
+Commands - C:\cygwin64\bin\mintty.exe -c %USERPROFILE%\SW\mintty\.minttyrc -t "local_ubuntu" C:\cygwin64\bin\ssh -p 8101 ary@127.0.0.1 -new_console:d:%USERPROFILE%

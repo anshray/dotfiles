@@ -123,3 +123,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+
+alias tree="find $1 -type d | grep -v '/\.' | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"

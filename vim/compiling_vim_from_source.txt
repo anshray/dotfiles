@@ -5,6 +5,11 @@ Ref:-
 3/ Vim as a Python IDE - Martin Brochhaus
 4/ http://wikimatze.de/compiling-vim-from-source-for-ubuntu-and-mac-with-rbenv
 
+Dependencies:-
+libncurses-dev libx11-dev libxpm-dev libxt-dev libxtst-dev
+python-dev
+ctags
+
 sudo apt remove vim vim-tiny vim-runtime vim-common
 cd ~
 cd projects

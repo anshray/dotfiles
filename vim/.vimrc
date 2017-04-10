@@ -1,5 +1,5 @@
 " Sample .vimrc file by Anshuman Ray (rayanshu@gmail.com)
-" version 6.4 beta
+" version 6.5 beta
 
 " ======================================
 " Note to myself:
@@ -67,6 +67,7 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'marcopaganini/termschool-vim-theme'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'jacoborus/tender.vim'
+Plugin 'morhetz/gruvbox'
 
 " Etc.
 "Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -97,6 +98,8 @@ filetype plugin indent on    " required
 " Basic usability key remaps
 nnoremap ; :
 cnoremap q1 q!
+cnoremap Q! q!
+cnoremap Q1 q!
 inoremap jk <esc>
 inoremap kj <esc>
 nnoremap Y y$
@@ -105,6 +108,57 @@ nnoremap Y y$
 " I like to have it here becuase it is easier to reach than the default and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
+
+" ===============================
+" Color scheme and font settings
+" ===============================
+" Set to True Color 256-bit
+set encoding=utf-8
+set t_Co=256
+set term=xterm-256color
+set termencoding=utf-8
+set termguicolors
+syntax on
+
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=blue guibg=blue
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+if has('gui_running')
+  set background=light
+else
+  set background=dark
+endif
+
+let g:gruvbox_color_column='bg1'
+"let g:solarized_termcolors=256
+"colorscheme solarized
+"colorscheme termschool
+"colorscheme wombat256mod
+"colorscheme railscasts
+"colorscheme tender
+colorscheme gruvbox
+
+" To enable easier toggle between light and dark themes
+call togglebg#map("<F12>")
+
+"set guifont=Monaco:h14
+"set cursorline
+
+" Increase the command window height
+set cmdheight=1
+
+" Showing line numbers and length
+set number  " show line numbers
+set tw=79   " width of document (used by gd)
+set nowrap  " don't automatically wrap on load
+set fo-=t   " don't automatically wrap text when typing
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
+" highlight last inserted text
+nnoremap gV `[v`]
 
 " visual autocomplete for command menu
 set wildmenu
@@ -141,56 +195,8 @@ set visualbell
 set t_vb=
 
 " Timeout between Insert to Command mode
-set ttimeoutlen=120
+set ttimeoutlen=125
 
-" ===============================
-" Color scheme and font settings
-" ===============================
-" Set to True Color 256-bit
-set encoding=utf-8
-set t_Co=256
-set term=xterm-256color
-set termencoding=utf-8
-"set termguicolors
-syntax on
-
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=blue guibg=blue
-au InsertLeave * match ExtraWhitespace /\s\+$/
-
-if has('gui_running')
-  set background=light
-else
-  set background=dark
-endif
-
-"let g:solarized_termcolors=256
-"colorscheme solarized
-"colorscheme termschool
-colorscheme wombat256mod
-"colorscheme railscasts
-"colorscheme tender
-
-" To enable easier toggle between light and dark themes
-"call togglebg#map("<F5>")
-
-"set guifont=Monaco:h14
-"set cursorline
-
-" Increase the command window height
-set cmdheight=1
-
-" Showing line numbers and length
-set number  " show line numbers
-set tw=79   " width of document (used by gd)
-set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
-highlight ColorColumn ctermbg=233
-
-" highlight last inserted text
-nnoremap gV `[v`]
 
 " ===============================
 " Navigation settings
@@ -269,7 +275,7 @@ let NERDTreeShowBookmarks=1
 " for vim-airline
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='badwolf'
+let g:airline_theme='molokai'
 let g:airline_powerline_fonts = 1
 
 " for vim-powerline

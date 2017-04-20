@@ -7,3 +7,7 @@ Commands - C:\cygwin64\bin\mintty.exe - -new_console:d:%USERPROFILE%
 {ssh_local::ubuntu @8101}
 Task Parameters - /dir "%USERPROFILE%\Desktop" /icon "C:\cygwin64\bin\mintty.exe" /single
 Commands - C:\cygwin64\bin\mintty.exe -c %USERPROFILE%\SW\mintty\.minttyrc -t "local_ubuntu" C:\cygwin64\bin\ssh -p 8101 ary@127.0.0.1 -new_console:d:%USERPROFILE%
+
+{ssh::local Ubuntu}
+Task Parameters - /dir "%USERPROFILE%\Desktop" /icon %USERPROFILE%\SW\cygwin64\bin\mintty.exe /single
+Commands - %USERPROFILE%\SW\cygwin64\bin\mintty.exe -c %USERPROFILE%\SW\mintty\minttyrc -t "local_ubuntu" %USERPROFILE%\SW\cygwin64\bin\ssh.exe -p 8101 ary@127.0.0.1 -new_console:d:%USERPROFILE%

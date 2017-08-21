@@ -65,16 +65,16 @@ function _parse_git_branch {
 }
 
 if [ "$color_prompt" = yes ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;36m\]$(_parse_git_branch)\[\033[00m\]\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\[\033[01;36m\]$(_parse_git_branch)\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\][\$(_parse_date)]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \W\a\][\$(_parse_date)]$PS1"
     ;;
 *)
     ;;
@@ -126,3 +126,7 @@ fi
 
 
 alias tree="find $1 -type d | grep -v '/\.' | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+alias edvimrc="vim ~/.vimrc"
+alias vn="~/neovim/bin/nvim"
+alias edvnrc="vn ~/.config/nvim/init.vim"

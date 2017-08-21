@@ -31,7 +31,6 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-bufferline'
-"Plugin 'jeetsukumaran/vim-buffergator'
 
 " html
 "Plugin 'isnowfy/python-vim-instant-markdown'
@@ -97,12 +96,15 @@ filetype plugin indent on    " required
 
 " Basic usability key remaps
 nnoremap ; :
+cnoremap Q q
 cnoremap q1 q!
 cnoremap Q! q!
 cnoremap Q1 q!
-inoremap jk <esc>
-inoremap kj <esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
 nnoremap Y y$
+map <F1> <Esc>
+map! <F1> <Esc>
 
 " Rebind <Leader> key
 " I like to have it here becuase it is easier to reach than the default and
@@ -117,7 +119,7 @@ set encoding=utf-8
 set t_Co=256
 set term=xterm-256color
 set termencoding=utf-8
-set termguicolors
+"set termguicolors
 syntax on
 
 " Show whitespace
@@ -209,6 +211,30 @@ nnoremap <C-K> 8k
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
+" use t{h,j,k,l} to switch between different windows
+    noremap tk <c-w>k
+    noremap tj <c-w>j
+    noremap th <c-w>h
+    noremap tl <c-w>l
+	nmap twj :resize +5<cr>
+	nmap twk :resize -5<cr>
+	nmap twh :vertical resize -5<cr>
+	nmap twl :vertical resize +5<cr>
+
+" t[number] => switch to the file showed in the top tabs
+" t[ t] => prev tab/next tab
+nmap t1 <Plug>AirlineSelectTab1
+nmap t2 <Plug>AirlineSelectTab2
+nmap t3 <Plug>AirlineSelectTab3
+nmap t4 <Plug>AirlineSelectTab4
+nmap t5 <Plug>AirlineSelectTab5
+nmap t6 <Plug>AirlineSelectTab6
+nmap t7 <Plug>AirlineSelectTab7
+nmap t8 <Plug>AirlineSelectTab8
+nmap t9 <Plug>AirlineSelectTab9
+nmap t[ <Plug>AirlineSelectPrevTab
+nmap t] <Plug>AirlineSelectNextTab
+
 " split navigations made simpler
 "nnoremap <C-J> <C-W><C-J>
 "nnoremap <C-K> <C-W><C-K>
@@ -238,6 +264,18 @@ endfunc
 
 nnoremap <F3> :call NumberToggle()<cr>
 
+set hidden
+noremap <C-TAB> :bnext<CR>
+noremap <C-S-TAB> :bprev<CR>
+
+" Remove all trailing whitespaces by pressing leader+t
+nnoremap <leader>t :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" Add full path of the current open buffer
+nnoremap <leader>p :put!=expand('%:p')<CR>
+
+"au InsertLeave * call TurnOffCaps() " Try to implement this
+
 
 " ===============================
 " Plugin settings
@@ -257,9 +295,16 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 "autocmd BufWritePost *.py,*.c,*.sh YcmForceCompileAndDiagnostics
 
+
 " ALE linter settings
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_sign_error = '~!'
+
+
+" Pydiction settings
+let g:pydiction_location = '/home/ary/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height = 4
+
 
 " Tagbar settings
 nmap <leader>o :TagbarToggle<CR>
@@ -272,11 +317,14 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 
+
 " for vim-airline
 set laststatus=2
+let g:airline_theme='understated' "'molokai'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='molokai'
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline_powerline_fonts = 1
+
 
 " for vim-powerline
 "set laststatus=2
@@ -287,6 +335,7 @@ let g:airline_powerline_fonts = 1
 "let g:Powerline_mode_cv="V·BLOCK"
 "let g:Powerline_mode_S="S·LINE"
 "let g:Powerline_mode_cs="S·BLOCK"
+
 
 " for NERDCommenter
 " Add spaces after comment delimiters by default
@@ -301,11 +350,13 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+
 " Settings for CtrlP
 let g:ctrlp_max_height = 24
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+
 
 " Settings for silversearcher ag plugin
 let g:ackprg = 'ag --vimgrep --smart-case'
@@ -313,11 +364,12 @@ cnoreabbrev ag Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 
+
 " Settings for jedi-vim
 let g:jedi#usages_command = "<leader>z"
-" let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_on_dot = 0
 
-"map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " python with virtualenv support
 py << EOF

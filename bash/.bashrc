@@ -128,5 +128,8 @@ fi
 alias tree="find $1 -type d | grep -v '/\.' | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
 alias edvimrc="vim ~/.vimrc"
-alias vn="~/neovim/bin/nvim"
-alias edvnrc="vn ~/.config/nvim/init.vim"
+alias vin="~/neovim/bin/nvim"
+alias edvinrc="vin ~/.config/nvim/init.vim"
+
+# bracketed paste mode off
+printf "\e[?2004l"

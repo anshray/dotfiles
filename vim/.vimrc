@@ -110,6 +110,10 @@ map! <F1> <Esc>
 " I like to have it here becuase it is easier to reach than the default and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
+set ts=4
+set sts=4
+set sw=4
+set et
 
 " ===============================
 " Color scheme and font settings

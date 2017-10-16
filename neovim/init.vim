@@ -1,5 +1,5 @@
 " Sample init.vim file by Anshuman Ray (rayanshu@gmail.com)
-" version 1.1 beta
+" version 1.2 beta
 
 " ======================================
 " Note to myself:
@@ -75,6 +75,7 @@ call plug#begin('~/.vim/plugged')
 
 " python
   Plug 'zchee/deoplete-jedi'
+  Plug 'davidhalter/jedi-vim'
   Plug 'hdima/python-syntax'
   Plug 'google/yapf'
 
@@ -101,6 +102,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'w0ng/vim-hybrid'
   Plug 'altercation/vim-colors-solarized'
   Plug 'tomasr/molokai'
+  Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -133,11 +135,16 @@ call plug#end()
   cnoremap Q1 q!
   inoremap jk <Esc>
   inoremap kj <Esc>
+  inoremap jj <Esc>
+  inoremap kk <Esc>
   nnoremap Y y$
   map <F1> <Esc>
   map! <F1> <Esc>
 
 " Some useful settings
+  set encoding=utf-8
+  set splitright
+  set splitbelow
   set mouse=a
   set number            "line number
   set nowrap            "no line wrapping
@@ -157,7 +164,14 @@ call plug#end()
   set ignorecase        "ignore the case when search texts
   set smartcase         "if searching text contains uppercase case will not be ignored
   set pastetoggle=<F2>
+  set spell spelllang=en_us
   nnoremap gV `[v`]     "highlight last inserted text
+  set completeopt=longest,menuone,preview
+  set autoread
+  set so=3 " scroll lines above/below cursor
+  set lazyredraw
+  set wildmode=longest,list,full
+  set undofile
 
 " Lookings
   "set cursorline       "hilight the line of the cursor
@@ -178,7 +192,7 @@ call plug#end()
   "let g:gruvbox_color_column='bg1'
   let g:gruvbox_italic=1
   let g:gruvbox_invert_selection=0
-  colorscheme gruvbox    "use the theme gruvbox
+  colorscheme base16-spacemacs    "use the theme gruvbox
   " change the color of chars over the width of 80 into blue
   " (uncomment to enable it)
   "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
@@ -311,6 +325,19 @@ call plug#end()
     xmap zI zm^<cr>I
     xmap zA zm$<cr>A
 
+" diff options. without this Gdiff was splitting horizontally on OSx.
+  set diffopt=filler,vertical
+
+" with this option on, a buffer is marked as ‘hidden’ if it has unsaved changes, and it is not currently loaded in a window.
+" If you try and quit Vim while there are hidden buffers, you will raise an error:
+" E162: No write since last change for buffer “a.txt”
+  set hidden
+
+" better gui clipboard integration
+" http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
+" http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+" set clipboard=unnamed
+  set clipboard=unnamedplus
 
 " ===============================
 " Plugin settings
@@ -332,6 +359,7 @@ call plug#end()
     let python_highlight_all = 1
 
   " Airline
+    set noshowmode  " hide default mode text (e.g. INSERT) as airline already displays it
     let g:airline_theme='murmur'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -348,6 +376,7 @@ call plug#end()
     let g:ale_lint_delay = 1000
     nmap ]a <Plug>(ale_next_wrap)
     nmap [a <Plug>(ale_previous_wrap
+    let g:ale_python_pylint_executable = 'pylint2'
 
   " Deoplete Auto-complete
     let g:deoplete#enable_at_startup = 1
@@ -371,6 +400,16 @@ call plug#end()
           \ '-isystem',
           \ '/Library/Frameworks',
           \ ]
+
+  " jedi-vim for python
+    let g:jedi#completions_enabled = 0
+    let g:jedi#usages_command = "<leader>z"
+    let g:jedi#force_py_version = 2
+    let g:jedi#completions_command = "<C-N>"
+
+  " deoplete-jedi for python
+    let g:deoplete#sources#jedi#show_docstring = 1
+    let g:deoplete#sources#jedi#server_timeout = 30
 
   " google YAPF
     autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
@@ -470,8 +509,9 @@ call plug#end()
     "highlight StartifyFooter  ctermfg=240
 
   " Supertab
-    let g:SuperTabMappingForward = '<s-tab>'
-    let g:SuperTabMappingBackward = '<tab>'
+    let g:SuperTabDefaultCompletionType = "<c-n>"
+    "let g:SuperTabMappingForward = '<s-tab>'
+    "let g:SuperTabMappingBackward = '<tab>'
   " Taglist
     let Tlist_Show_One_File=1
     let Tlist_Exit_OnlyWindow=1
@@ -503,9 +543,10 @@ call plug#end()
   "au! QuitPre * call ToStartify()
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   autocmd BufWritePost *.scala :EnTypeCheck
-  cd $HOME
+  "cd $HOME
   au BufRead,BufNewFile,BufEnter \@!(term://)* cd %:p:h
   "au! BufWritePost * Neomake
   autocmd FileType json set nocursorcolumn
 
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+"autocmd CompleteDone * pclose " To close preview window of deoplete automagically

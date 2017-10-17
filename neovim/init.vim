@@ -74,9 +74,9 @@ call plug#begin('~/.vim/plugged')
   "Plug 'vhakulinen/neovim-intellij-complete-deoplete'
 
 " python
-  Plug 'zchee/deoplete-jedi'
-  Plug 'davidhalter/jedi-vim'
   Plug 'hdima/python-syntax'
+  Plug 'davidhalter/jedi-vim'
+  Plug 'zchee/deoplete-jedi'
   Plug 'google/yapf'
 
 " html/css/javascript
@@ -172,6 +172,7 @@ call plug#end()
   set lazyredraw
   set wildmode=longest,list,full
   set undofile
+  set numberwidth=3
 
 " Lookings
   "set cursorline       "hilight the line of the cursor
@@ -183,15 +184,15 @@ call plug#end()
   set background=dark
   "let g:hybrid_custom_term_colors = 1
   "let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-  nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-  nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-  nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-  nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-  nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-  nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
-  "let g:gruvbox_color_column='bg1'
-  let g:gruvbox_italic=1
-  let g:gruvbox_invert_selection=0
+  "nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+  "nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+  "nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+  "nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+  "nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+  "nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+  ""let g:gruvbox_color_column='bg1'
+  "let g:gruvbox_italic=1
+  "let g:gruvbox_invert_selection=0
   colorscheme base16-spacemacs    "use the theme gruvbox
   " change the color of chars over the width of 80 into blue
   " (uncomment to enable it)
@@ -274,11 +275,11 @@ call plug#end()
   " ti => taglist
     "nmap ti :TagbarClose<CR>:Tlist<CR>
   " <s-enter> => toggle the terminal
-    if exists('nyaovim_version')
-      nnoremap <silent> <s-cr> :Ttoggle<cr>
-    else " in terminal use t<enter>
-      nmap t<CR> :Ttoggle<CR>
-    endif
+  "  if exists('nyaovim_version')
+  "    nnoremap <silent> <s-cr> :Ttoggle<cr>
+  "  else " in terminal use t<enter>
+  "    nmap t<CR> :Ttoggle<CR>
+  "  endif
   " tt => type the command for the terminal
     nnoremap tt :T<space>
   " te => send current line/selected lines to the terminal
@@ -353,7 +354,7 @@ call plug#end()
 
   " Tagbar
     nmap <leader>o :TagbarToggle<CR>
-    let g:tagbar_width=30
+    let g:tagbar_width=35
 
   " hdima/python-syntax
     let python_highlight_all = 1
@@ -369,14 +370,18 @@ call plug#end()
     endif
 
   " ALE Linter
-    let g:ale_completion_enabled = 0  " do not let ALE hijack omni compeltion
+    let g:ale_completion_enabled = 0  " do not let ALE hijack omni completion
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
     let g:ale_lint_delay = 1000
     nmap ]a <Plug>(ale_next_wrap)
-    nmap [a <Plug>(ale_previous_wrap
+    nmap [a <Plug>(ale_previous_wrap)
     let g:ale_python_pylint_executable = 'pylint2'
+    let g:ale_sign_error = ''
+    let g:ale_sign_warning = '»'
+    let g:ale_virtualenv_dir_names = ['.env', 'env', 've-py3', 've', 'virtualenv', 'venv']
+    let g:ale_type_map = {'pylint': {'ES': 'WS'}}
 
   " Deoplete Auto-complete
     let g:deoplete#enable_at_startup = 1

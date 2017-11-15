@@ -1,9 +1,10 @@
 " Sample init.vim file by Anshuman Ray (rayanshu@gmail.com)
-" version 1.2 beta
+" version 1.3 beta
 
 " ======================================
 " Note to myself:
 " <Any note to remember>
+" references: mhartington/dotfiles, ...
 " ======================================
 
 function! DoRemote(arg)
@@ -17,8 +18,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'ervandew/supertab'
   Plug 'scrooloose/nerdcommenter'
   "Plug 'jiangmiao/auto-pairs'
-  "Plug 'SirVer/ultisnips'
-  "Plug 'honza/vim-snippets'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
 " command extension
   Plug 'easymotion/vim-easymotion'
@@ -32,7 +33,7 @@ call plug#begin('~/.vim/plugged')
 
 " utils
   "Plug 'neomake/neomake'
-  "Plug 'kassio/neoterm'
+  Plug 'kassio/neoterm'
   "Plug 'sjl/gundo.vim'
   "Plug 'chrisbra/NrrwRgn'
   "Plug 'Mark--Karkat'
@@ -58,7 +59,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'mileszs/ack.vim'
+  Plug 'mhinz/vim-sayonara'
+  "Plug 'mileszs/ack.vim'
   "Plug 'bling/vim-bufferline'
   "Plug 'ctrlpvim/ctrlp.vim'
   "Plug 'wesleyche/SrcExpl'
@@ -93,16 +95,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'Yggdroot/indentLine'
   Plug 'ryanoasis/vim-devicons'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   "Plug 'myusuf3/numbers.vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'iryston/gruvbox'
   Plug 'turly/vimstuff'  " bluish
-  Plug 'nightsense/willy'
   Plug 'w0ng/vim-hybrid'
-  Plug 'altercation/vim-colors-solarized'
   Plug 'tomasr/molokai'
   Plug 'chriskempson/base16-vim'
+  Plug 'mhartington/oceanic-next'
+  Plug 'altercation/vim-colors-solarized'
+  "Plug 'nightsense/willy'
 
 call plug#end()
 
@@ -125,6 +129,8 @@ call plug#end()
   filetype plugin on
   filetype plugin indent on
   set termguicolors
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   syntax on
 
 " Basic usability key remaps
@@ -140,11 +146,12 @@ call plug#end()
   nnoremap Y y$
   map <F1> <Esc>
   map! <F1> <Esc>
+  command! W :w
 
 " Some useful settings
   set encoding=utf-8
   set splitright
-  set splitbelow
+  "set splitbelow
   set mouse=a
   set number            "line number
   set nowrap            "no line wrapping
@@ -173,6 +180,7 @@ call plug#end()
   set wildmode=longest,list,full
   set undofile
   set numberwidth=3
+  set clipboard+=unnamedplus
 
 " Lookings
   "set cursorline       "hilight the line of the cursor
@@ -197,7 +205,6 @@ call plug#end()
   " change the color of chars over the width of 80 into blue
   " (uncomment to enable it)
   "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " To enable easier toggle between light and dark themes
   call togglebg#map("<F12>")
 
@@ -205,7 +212,15 @@ call plug#end()
     nnoremap <C-J> 8j
     nnoremap <C-K> 8k
 
-  " toggle b/w number and relative number seamlessly
+    " Align blocks of text and keep them selected
+    vmap < <gv
+    vmap > >gv
+
+    nnoremap <leader>d "_d
+    vnoremap <leader>d "_d
+    vnoremap <c-/> :TComment<cr>
+
+    " toggle b/w number and relative number seamlessly
     function! NumberToggle()
       if(&relativenumber == 1)
         set nornu
@@ -338,7 +353,6 @@ call plug#end()
 " http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
 " http://vim.wikia.com/wiki/Accessing_the_system_clipboard
 " set clipboard=unnamed
-  set clipboard=unnamedplus
 
 " ===============================
 " Plugin settings
@@ -347,10 +361,37 @@ call plug#end()
   " NERDTree
     nmap <F4> :NERDTreeToggle<CR>
     let NERDTreeMapActivateNode='<space>'
+    let NERDTreeShowHidden=1
+    let NERDTreeHijackNetrw=0
+    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    let g:NERDTreeWinSize=45
+    let g:NERDTreeAutoDeleteBuffer=1
+    let g:WebDevIconsOS = 'Darwin'
+    let NERDTreeMinimalUI=1
+    let NERDTreeCascadeSingleChildDir=1
+    let g:NERDTreeHeader = 'hello'
+
+    " let g:webdevicons_conceal_nerdtree_brackets = 0
+    " let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+    " 
+    let g:NERDTreeShowIgnoredStatus = 0
+    " let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 1
+    " let g:NERDTreeDirArrows = 1
+    let g:NERDTreeDirArrowExpandable = ''
+    let g:NERDTreeDirArrowCollapsible = ''
+    let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+
+  " Nerdtree sybtax highlight
+    let g:NERDTreeFileExtensionHighlightFullName = 1
+    let g:NERDTreeExactMatchHighlightFullName = 1
+    let g:NERDTreePatternMatchHighlightFullName = 1
 
   " UndoTree
     let g:undotree_WindowLayout = 2
     nnoremap U :UndotreeToggle<CR>
+
+  " Sayonara
+    nnoremap <leader>x :Sayonara<CR>
 
   " Tagbar
     nmap <leader>o :TagbarToggle<CR>
@@ -359,9 +400,28 @@ call plug#end()
   " hdima/python-syntax
     let python_highlight_all = 1
 
+  " FZF.vim
+    nnoremap <C-p> :Files<CR>
+
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+
   " Airline
     set noshowmode  " hide default mode text (e.g. INSERT) as airline already displays it
-    let g:airline_theme='murmur'
+    let g:airline_theme='tomorrow'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_idx_mode = 1
     let g:airline_powerline_fonts = 1
@@ -420,10 +480,10 @@ call plug#end()
     autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 
   " Settings for silversearcher ag plugin
-    let g:ackprg = 'ag --vimgrep --smart-case'
-    cnoreabbrev ag Ack
-    cnoreabbrev Ag Ack
-    cnoreabbrev AG Ack
+    "let g:ackprg = 'ag --vimgrep --smart-case'
+    "cnoreabbrev ag Ack
+    "cnoreabbrev Ag Ack
+    "cnoreabbrev AG Ack
 
   " EasyAlign
     xmap ga <Plug>(LiveEasyAlign)

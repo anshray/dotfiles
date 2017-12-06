@@ -25,7 +25,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-surround'
   Plug 'mbbill/undotree',    { 'on': 'UndotreeToggle' }
-  Plug 'tpope/vim-surround'
   Plug 'wellle/targets.vim'
   Plug 'tpope/vim-repeat'
   "Plug 'junegunn/vim-easy-align'  " cool plugin
@@ -36,7 +35,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'kassio/neoterm'
   "Plug 'sjl/gundo.vim'
   "Plug 'chrisbra/NrrwRgn'
-  "Plug 'Mark--Karkat'
+  Plug 'vim-scripts/Mark--Karkat'
 
 " misc
   "Plug 'asins/vimcdoc'
@@ -134,7 +133,7 @@ call plug#end()
   syntax on
 
 " Basic usability key remaps
-  nnoremap ; :
+  "nnoremap ; :
   cnoremap Q q
   cnoremap q1 q!
   cnoremap Q! q!
@@ -171,7 +170,7 @@ call plug#end()
   set ignorecase        "ignore the case when search texts
   set smartcase         "if searching text contains uppercase case will not be ignored
   set pastetoggle=<F2>
-  set spell spelllang=en_us
+  set nospell spelllang=en_us
   nnoremap gV `[v`]     "highlight last inserted text
   set completeopt=longest,menuone,preview
   set autoread
@@ -201,7 +200,7 @@ call plug#end()
   ""let g:gruvbox_color_column='bg1'
   "let g:gruvbox_italic=1
   "let g:gruvbox_invert_selection=0
-  colorscheme base16-spacemacs    "use the theme gruvbox
+  colorscheme OceanicNext    "use the theme gruvbox
   " change the color of chars over the width of 80 into blue
   " (uncomment to enable it)
   "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
@@ -596,6 +595,11 @@ call plug#end()
     else "as <shift-enter> can't be handled in terminal, use <ctrl-k> instead
       let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
     endif
+
+  " Vim-Devicons
+    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
+    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
 
 " Automatics
   "function! ToStartify()

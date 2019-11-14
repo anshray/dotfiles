@@ -129,7 +129,7 @@ call plug#end()
   filetype plugin indent on
   set termguicolors
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   syntax on
 
 " Basic usability key remaps
@@ -178,12 +178,15 @@ call plug#end()
   set lazyredraw
   set wildmode=longest,list,full
   set undofile
-  set numberwidth=3
+  set numberwidth=2
   set clipboard+=unnamedplus
 
 " Lookings
   "set cursorline       "hilight the line of the cursor
   "set cursorcolumn     "hilight the column of the cursor
+  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		  \,sm:block-blinkwait175-blinkoff150-blinkon175
   " Show whitespace
   " MUST be inserted BEFORE the colorscheme command
   autocmd ColorScheme * highlight ExtraWhitespace ctermbg=blue guibg=blue
@@ -362,10 +365,10 @@ call plug#end()
     let NERDTreeMapActivateNode='<space>'
     let NERDTreeShowHidden=1
     let NERDTreeHijackNetrw=0
-    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    "let g:WebDevIconsUnicodeDecorateFolderNodes = 1
     let g:NERDTreeWinSize=45
     let g:NERDTreeAutoDeleteBuffer=1
-    let g:WebDevIconsOS = 'Darwin'
+    "let g:WebDevIconsOS = 'Darwin'
     let NERDTreeMinimalUI=1
     let NERDTreeCascadeSingleChildDir=1
     let g:NERDTreeHeader = 'hello'
@@ -376,9 +379,9 @@ call plug#end()
     let g:NERDTreeShowIgnoredStatus = 0
     " let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 1
     " let g:NERDTreeDirArrows = 1
-    let g:NERDTreeDirArrowExpandable = ''
-    let g:NERDTreeDirArrowCollapsible = ''
-    let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+    "let g:NERDTreeDirArrowExpandable = ''
+    "let g:NERDTreeDirArrowCollapsible = ''
+    "let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
 
   " Nerdtree sybtax highlight
     let g:NERDTreeFileExtensionHighlightFullName = 1
@@ -423,7 +426,7 @@ call plug#end()
     let g:airline_theme='tomorrow'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_idx_mode = 1
-    let g:airline_powerline_fonts = 1
+    "let g:airline_powerline_fonts = 1
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
     endif
@@ -436,8 +439,8 @@ call plug#end()
     let g:ale_lint_delay = 1000
     nmap ]a <Plug>(ale_next_wrap)
     nmap [a <Plug>(ale_previous_wrap)
-    let g:ale_python_pylint_executable = 'pylint2'
-    let g:ale_sign_error = ''
+    let g:ale_python_pylint_executable = 'pylint3'
+    "let g:ale_sign_error = ''
     let g:ale_sign_warning = '»'
     let g:ale_virtualenv_dir_names = ['.env', 'env', 've-py3', 've', 'virtualenv', 'venv']
     let g:ale_type_map = {'pylint': {'ES': 'WS'}}
@@ -468,7 +471,7 @@ call plug#end()
   " jedi-vim for python
     let g:jedi#completions_enabled = 0
     let g:jedi#usages_command = "<leader>z"
-    let g:jedi#force_py_version = 2
+    let g:jedi#force_py_version = 3
     let g:jedi#completions_command = "<C-N>"
 
   " deoplete-jedi for python
@@ -530,7 +533,7 @@ call plug#end()
   " Neoterm
     let g:neoterm_size=20
     let g:neoterm_repl_command= 'zsh'
-    let g:neoterm_position = 'horizontal'
+    "let g:neoterm_position = 'horizontal'
     " toogle the terminal
     " kills the current job (send a <c-c>)
     nnoremap <silent> tc :call neoterm#kill()<cr>
@@ -597,9 +600,9 @@ call plug#end()
     endif
 
   " Vim-Devicons
-    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
-    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
-    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
+    "let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+    "let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
+    "let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
 
 " Automatics
   "function! ToStartify()
